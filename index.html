@@ -3,170 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portfólio | Desenvolvedor Web</title>
+    <title>E-book: O Guia das Vendas Online</title>
     <style>
-        /* CSS VARIÁVEIS: O segredo para o Tema Claro/Escuro */
-        :root {
-            --bg-color: #0f172a;
-            --text-color: #f8fafc;
-            --card-bg: #1e293b;
-            --primary-color: #38bdf8;
-            --nav-bg: rgba(15, 23, 42, 0.9);
+        /* Reset de margens e configuração de fonte */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
         }
 
-        /* Classe que o JS vai ativar para o Tema Claro */
-        .tema-claro {
-            --bg-color: #f8fafc;
-            --text-color: #0f172a;
-            --card-bg: #ffffff;
-            --primary-color: #0284c7;
-            --nav-bg: rgba(248, 250, 252, 0.9);
+        /* --- HERO SECTION (A Primeira Impressão) --- */
+        .hero {
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 5px solid #ff8c00; /* Detalhe chamativo na borda */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; transition: background-color 0.3s, color 0.3s; }
-        
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+        .hero h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
 
-        /* NAVEGAÇÃO SUPERIOR */
-        nav { position: fixed; top: 0; width: 100%; padding: 20px; display: flex; justify-content: space-between; align-items: center; background-color: var(--nav-bg); backdrop-filter: blur(10px); z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .logo { font-size: 24px; font-weight: bold; color: var(--primary-color); }
-        #btn-tema { background: none; border: 2px solid var(--primary-color); color: var(--primary-color); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; }
+        .hero h1 span {
+            color: #ff8c00; /* Destacando a promessa principal */
+        }
 
-        /* SEÇÃO HERO (Apresentação) */
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; padding-top: 80px; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        
-        /* O cursor piscando do efeito de digitação */
-        .digitacao { color: var(--primary-color); font-weight: bold; border-right: 3px solid var(--primary-color); animation: piscar 0.7s infinite; padding-right: 5px; }
-        @keyframes piscar { 50% { border-color: transparent; } }
+        .hero p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #cccccc;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-        .hero p { max-width: 600px; margin: 20px auto; font-size: 1.1rem; opacity: 0.9; }
+        /* O Botão de Compra (Call to Action) */
+        .cta-botao {
+            display: inline-block;
+            background-color: #ff8c00;
+            color: #141e30;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 15px 30px;
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
+            animation: pulsar 2s infinite; /* Animação para chamar atenção */
+        }
 
-        /* GRADE DE PROJETOS */
-        .projetos-section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
-        .projetos-section h2 { text-align: center; font-size: 2rem; margin-bottom: 40px; color: var(--primary-color); }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        
-        .card { background-color: var(--card-bg); padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid var(--primary-color); transition: transform 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .card h3 { margin-bottom: 10px; font-size: 1.5rem; }
-        .card p { margin-bottom: 20px; font-size: 0.95rem; opacity: 0.8; }
-        .card a { display: inline-block; text-decoration: none; background-color: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: 6px; font-weight: bold; }
+        .cta-botao:active {
+            transform: scale(0.95);
+        }
+
+        /* --- SEÇÃO DE BENEFÍCIOS --- */
+        .beneficios {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .beneficios h2 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #243b55;
+        }
+
+        /* Usando Flexbox para organizar os cards no celular */
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid #243b55;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        /* Animação do botão */
+        @keyframes pulsar {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+                /* --- SEÇÃO DE OFERTA (PREÇO) --- */
+        .oferta {
+            background-color: #e0f7fa; /* Fundo levemente azulado para destacar */
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .preco-box {
+            background-color: white;
+            padding: 40px 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 5px solid #ff8c00; /* Laranja combinando com o seu design */
+        }
+
+        .preco-box h2 {
+            color: #243b55;
+            margin-bottom: 10px;
+        }
+
+        .preco-valor {
+            font-size: 40px;
+            color: #ff8c00;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .preco-valor span {
+            font-size: 20px;
+            color: #666;
+        }
+
+        /* --- RODAPÉ (FOOTER) --- */
+        footer {
+            background-color: #141e30;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+        /* --- BOTÃO FLUTUANTE DO WHATSAPP --- */
+        .whatsapp-float {
+            position: fixed; /* Fixa o elemento na tela */
+            width: 60px;
+            height: 60px;
+            bottom: 20px; /* Distância do fundo */
+            right: 20px; /* Distância da direita */
+            background-color: #25d366; /* Verde oficial do WhatsApp */
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000; /* Garante que fique por cima de tudo no site */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+            animation: pulse-ws 2s infinite; /* A onda de atenção */
+        }
+
+        /* Efeito de clique */
+        .whatsapp-float:active {
+            transform: scale(0.9);
+        }
+
+        /* A animação da onda verde */
+        @keyframes pulse-ws {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
 
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">{"Dev"}</div>
-        <button id="btn-tema" onclick="trocarTema()">☀️ Tema Claro</button>
-    </nav>
-
     <header class="hero">
-        <h1>Olá! Eu construo <br><span class="digitacao" id="texto-dinamico"></span></h1>
-        <p>Sou um Desenvolvedor Web focado em criar soluções digitais que geram resultados reais para negócios e profissionais autônomos.</p>
+        <h1>Aprenda a criar uma renda extra <span>usando apenas o celular</span></h1>
+        <p>O método passo a passo para iniciar no mercado digital e realizar suas primeiras vendas sem precisar aparecer na câmera.</p>
+        <a href="#comprar" class="cta-botao">Quero Começar Hoje!</a>
     </header>
 
-    <section class="projetos-section">
-        <h2>Meus Sistemas & Projetos</h2>
-        <div class="grid">
+    <section class="beneficios">
+        <h2>O que você vai descobrir neste E-book?</h2>
+        
+        <div class="cards-container">
+            <div class="card">
+                <h3>🚀 Estratégias Validadas</h3>
+                <p>Técnicas de vendas diretas que funcionam para qualquer nicho de mercado.</p>
+            </div>
             
             <div class="card">
-                <h3>Landing Page de Alta Conversão</h3>
-                <p>Página de vendas com design premium, rolagem suave (Smooth Scroll) e botão flutuante para capturar clientes.</p>
-                <a href="https://github.com/alvaroviana0/meus-links/blob/7b8dedf44d9e5442b1a73ed21104b265f05bf8cc/landing-page-vendas">Ver Projeto</a>
+                <h3>📱 Liberdade Geográfica</h3>
+                <p>Trabalhe de qualquer lugar precisando apenas de uma conexão com a internet.</p>
             </div>
-
+            
             <div class="card">
-                <h3>Sistema de Orçamentos</h3>
-                <p>Calculadora JavaScript com tela de Login (Autenticação) para prestadores de serviços.</p>
-                <a href="/calculadora/index.html">Ver Projeto</a>
+                <h3>💰 Baixo Custo Inicial</h3>
+                <p>Como estruturar o seu negócio sem precisar investir fortunas em anúncios.</p>
             </div>
-
-            <div class="card">
-                <h3>CRM Gerenciador</h3>
-                <p>Aplicativo CRUD que salva dados de clientes e tarefas direto na memória do navegador (LocalStorage).</p>
-                <a href="/crm/index.html">Ver Projeto</a>
-            </div>
-
-            <div class="card">
-                <h3>Buscador de CEP (API)</h3>
-                <p>Integração com API externa para buscar endereços automaticamente usando o protocolo Fetch.</p>
-                <a href="/cep/index.html">Ver Projeto</a>.
-
+        </div>
+    </section>
+        <section id="comprar" class="oferta">
+        <div class="preco-box">
+            <h2>Adquira seu E-book Agora</h2>
+            <p>Acesso imediato ao método completo.</p>
+            <div class="preco-valor"><span>R$</span> 47,90</div>
+            
+            <a href="https://wa.me/5585992398900" class="cta-botao">Comprar Agora</a>
         </div>
     </section>
 
+    <footer>
+        <p>© 2026 Sua Marca Digital. Todos os direitos reservados.</p>
+    </footer>
     <script>
-        /* =========================================
-           SCRIPT 1: MÁQUINA DE ESCREVER (Typewriter)
-           ========================================= */
-        const palavras = ["Landing Pages.", "Sistemas Web.", "Automações.", "Links na Bio."];
-        let palavraAtual = 0;
-        let letraAtual = 0;
-        let apagando = false;
-        const elementoTexto = document.getElementById("texto-dinamico");
-
-        function digitar() {
-            const textoCompleto = palavras[palavraAtual];
-
-            // Se estiver apagando, remove uma letra. Se não, adiciona uma letra.
-            if (apagando) {
-                elementoTexto.textContent = textoCompleto.substring(0, letraAtual - 1);
-                letraAtual--;
-            } else {
-                elementoTexto.textContent = textoCompleto.substring(0, letraAtual + 1);
-                letraAtual++;
-            }
-
-            // Velocidade da digitação
-            let velocidade = apagando ? 50 : 100;
-
-            // Pausa quando termina de escrever a palavra inteira
-            if (!apagando && letraAtual === textoCompleto.length) {
-                velocidade = 2000; // Espera 2 segundos
-                apagando = true;
-            } 
-            // Troca para a próxima palavra quando termina de apagar
-            else if (apagando && letraAtual === 0) {
-                apagando = false;
-                palavraAtual++;
-                if (palavraAtual === palavras.length) { palavraAtual = 0; } // Volta pro início
-                velocidade = 500;
-            }
-
-            setTimeout(digitar, velocidade);
-        }
-
-        // Dá a partida na máquina de escrever assim que o site abre
-        document.addEventListener("DOMContentLoaded", digitar);
-
-        /* =========================================
-           SCRIPT 2: TEMA CLARO E ESCURO COM MEMÓRIA
-           ========================================= */
-        const botaoTema = document.getElementById("btn-tema");
-        
-        // Verifica se o usuário já tinha escolhido o tema claro na última visita
-        if (localStorage.getItem("tema") === "claro") {
-            document.body.classList.add("tema-claro");
-            botaoTema.textContent = "🌙 Tema Escuro";
-        }
-
-        function trocarTema() {
-            // O toggle liga e desliga a classe no <body>
-            document.body.classList.toggle("tema-claro");
+        // 1. Procuramos todos os links que começam com "#" (como o nosso href="#comprar")
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
             
-            // Se o body agora tem a classe "tema-claro", salvamos isso na memória
-            if (document.body.classList.contains("tema-claro")) {
-                localStorage.setItem("tema", "claro");
-                botaoTema.textContent = "🌙 Tema Escuro";
-            } else {
-                // Se não tem, salvamos como escuro
-                localStorage.setItem("tema", "escuro");
-                botaoTema.textContent = "☀️ Tema Claro";
-            }
-        }
+            // 2. Adicionamos um "ouvinte" para quando alguém clicar no botão
+            link.addEventListener('click', function (evento) {
+                
+                // 3. Impedimos o comportamento padrão do HTML (que é aquele pulo seco)
+                evento.preventDefault(); 
+                
+                // 4. Descobrimos para onde o botão quer ir
+                const destino = document.querySelector(this.getAttribute('href'));
+                
+                // 5. Comandamos a tela para deslizar suavemente até o destino!
+                destino.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
+        <a href="https://wa.me/5585992398900?text=Olá!%20Tenho%20interesse%20nas%20estratégias%20de%20vendas." class="whatsapp-float" target="_blank">
+        
+        <svg viewBox="0 0 32 32" width="35" height="35" fill="white">
+            <path d="M16.01 2.01A13.92 13.92 0 0 0 2.09 15.93c0 2.45.63 4.83 1.83 6.94L2 29.98l7.28-1.9a13.84 13.84 0 0 0 6.73 1.74A13.92 13.92 0 0 0 29.93 15.9 13.92 13.92 0 0 0 16.01 2.01zm0 25.5a11.5 11.5 0 0 1-5.88-1.61l-.42-.25-4.36 1.14 1.16-4.25-.28-.44a11.5 11.5 0 0 1-1.72-6.07A11.55 11.55 0 0 1 16.01 4.38a11.55 11.55 0 0 1 11.53 11.54 11.55 11.55 0 0 1-11.53 11.58zm6.33-8.63c-.35-.17-2.06-1.01-2.38-1.13-.32-.12-.55-.18-.78.17-.23.35-.9 1.13-1.11 1.36-.2.23-.41.26-.76.09-.34-.17-1.47-.54-2.8-1.73-1.03-.92-1.73-2.06-1.93-2.41-.2-.35-.02-.54.15-.71.16-.16.35-.41.52-.61.18-.2.24-.35.36-.58.11-.23.05-.44-.04-.62-.09-.17-.78-1.88-1.07-2.58-.28-.68-.57-.59-.78-.6-.2-.01-.43-.01-.66-.01-.23 0-.61.09-.93.44s-1.22 1.19-1.22 2.9c0 1.71 1.25 3.37 1.43 3.6.17.24 2.45 3.75 5.94 5.26 2.37 1.03 3.23 1.11 4.41.94 1.33-.19 4.05-1.66 4.62-3.26.57-1.6.57-2.98.4-3.27-.18-.28-.65-.45-1-.62z"/>
+        </svg>
+    </a>
+
+</body>
+
+
 </body>
 </html>

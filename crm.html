@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Painel de Clientes</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: #0f172a; color: #e2e8f0; padding: 20px; }
+        
+        .container { max-width: 500px; margin: 0 auto; background-color: #1e293b; padding: 25px; border-radius: 12px; }
+        h1 { text-align: center; color: #38bdf8; margin-bottom: 20px; }
+        
+        .entrada-dados { display: flex; gap: 10px; margin-bottom: 20px; }
+        input { flex: 1; padding: 12px; border-radius: 6px; border: none; background-color: #334155; color: white; }
+        button.btn-salvar { padding: 12px 20px; border: none; border-radius: 6px; background-color: #38bdf8; color: #0f172a; font-weight: bold; cursor: pointer; }
+        
+        ul { list-style: none; }
+        li { background-color: #334155; padding: 15px; border-radius: 6px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        
+        /* A MÁGICA DO CSS AQUI */
+        .texto-tarefa { font-size: 16px; transition: 0.3s; cursor: pointer; }
+        
+        /* Essa classe será ativada pelo JavaScript */
+        .concluida { 
+            text-decoration: line-through; 
+            color: #22c55e; /* Verde profissional */
+            opacity: 0.7;
+        }
+
+        .botoes-acao { display: flex; gap: 10px; }
+        .btn-check { background-color: #22c55e; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-apagar { background-color: #ef4444; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gerenciador de Pedidos ✅</h1>
+        <div class="entrada-dados">
+            <input type="text" id="novo-pedido" placeholder="Ex: Fazer site do João...">
+            <button class="btn-salvar" onclick="adicionar()">Salvar</button>
+        </div>
+        <ul id="lista-pedidos"></ul>
+    </div>
+
+    <script>
+        // Agora nossa lista guarda "Objetos"
+        let pedidos = JSON.parse(localStorage.getItem("meusPedidosAvancado")) || [];
+
+        function atualizarTela() {
+            let listaHTML = document.getElementById("lista-pedidos");
+            listaHTML.innerHTML = ""; 
+
+            for (let i = 0; i < pedidos.length; i++) {
+                // Se a tarefa estiver concluída, adicionamos a classe CSS "concluida"
+                let classeCSS = pedidos[i].concluido ? "concluida" : "";
+
+                listaHTML.innerHTML += `
+                    <li>
+                        <span class="${classeCSS}">${pedidos[i].nome}</span>
+                        <div class="botoes-acao">
+                            <button class="btn-check" onclick="marcarFeito(${i})">✔</button>
+                            <button class="btn-apagar" onclick="deletar(${i})">X</button>
+                        </div>
+                    </li>
+                `;
+            }
+        }
+
+        function adicionar() {
+            let input = document.getElementById("novo-pedido");
+            if (input.value !== "") {
+                // Salva como Objeto (nome do pedido + status de conclusão)
+                pedidos.push({ nome: input.value, concluido: false }); 
+                input.value = ""; 
+                salvarNoCelular(); 
+                atualizarTela(); 
+            }
+        }
+
+        // FUNÇÃO NOVA: Inverte o status de false para true (e vice-versa)
+        function marcarFeito(posicao) {
+            pedidos[posicao].concluido = !pedidos[posicao].concluido; 
+            salvarNoCelular();
+            atualizarTela();
+        }
+
+        function deletar(posicao) {
+            pedidos.splice(posicao, 1); 
+            salvarNoCelular();
+            atualizarTela();
+        }
+
+        function salvarNoCelular() {
+            localStorage.setItem("meusPedidosAvancado", JSON.stringify(pedidos));
+        }
+
+        atualizarTela();
+    </script>
+</body>
+</html>

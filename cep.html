@@ -3,171 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portfólio | Desenvolvedor Web</title>
+    <title>Buscador de CEP (API)</title>
     <style>
-        /* CSS VARIÁVEIS: O segredo para o Tema Claro/Escuro */
-        :root {
-            --bg-color: #0f172a;
-            --text-color: #f8fafc;
-            --card-bg: #1e293b;
-            --primary-color: #38bdf8;
-            --nav-bg: rgba(15, 23, 42, 0.9);
-        }
-
-        /* Classe que o JS vai ativar para o Tema Claro */
-        .tema-claro {
-            --bg-color: #f8fafc;
-            --text-color: #0f172a;
-            --card-bg: #ffffff;
-            --primary-color: #0284c7;
-            --nav-bg: rgba(248, 250, 252, 0.9);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; transition: background-color 0.3s, color 0.3s; }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; padding: 40px 20px; }
+        .formulario { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        h2 { color: #333; margin-bottom: 20px; text-align: center; }
         
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
-
-        /* NAVEGAÇÃO SUPERIOR */
-        nav { position: fixed; top: 0; width: 100%; padding: 20px; display: flex; justify-content: space-between; align-items: center; background-color: var(--nav-bg); backdrop-filter: blur(10px); z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .logo { font-size: 24px; font-weight: bold; color: var(--primary-color); }
-        #btn-tema { background: none; border: 2px solid var(--primary-color); color: var(--primary-color); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; }
-
-        /* SEÇÃO HERO (Apresentação) */
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; padding-top: 80px; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        
-        /* O cursor piscando do efeito de digitação */
-        .digitacao { color: var(--primary-color); font-weight: bold; border-right: 3px solid var(--primary-color); animation: piscar 0.7s infinite; padding-right: 5px; }
-        @keyframes piscar { 50% { border-color: transparent; } }
-
-        .hero p { max-width: 600px; margin: 20px auto; font-size: 1.1rem; opacity: 0.9; }
-
-        /* GRADE DE PROJETOS */
-        .projetos-section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
-        .projetos-section h2 { text-align: center; font-size: 2rem; margin-bottom: 40px; color: var(--primary-color); }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        
-        .card { background-color: var(--card-bg); padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid var(--primary-color); transition: transform 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .card h3 { margin-bottom: 10px; font-size: 1.5rem; }
-        .card p { margin-bottom: 20px; font-size: 0.95rem; opacity: 0.8; }
-        .card a { display: inline-block; text-decoration: none; background-color: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: 6px; font-weight: bold; }
-
+        label { font-weight: bold; font-size: 14px; color: #555; display: block; margin-top: 15px; }
+        input { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
+        input[readonly] { background-color: #e9ecef; color: #666; } /* Deixa os campos preenchidos cinzas */
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">{"Dev"}</div>
-        <button id="btn-tema" onclick="trocarTema()">☀️ Tema Claro</button>
-    </nav>
-
-    <header class="hero">
-        <h1>Olá! Eu construo <br><span class="digitacao" id="texto-dinamico"></span></h1>
-        <p>Sou um Desenvolvedor Web focado em criar soluções digitais que geram resultados reais para negócios e profissionais autônomos.</p>
-    </header>
-
-    <section class="projetos-section">
-        <h2>Meus Sistemas & Projetos</h2>
-        <div class="grid">
-            
-            <div class="card">
-                <h3>Landing Page de Alta Conversão</h3>
-                <p>Página de vendas com design premium, rolagem suave (Smooth Scroll) e botão flutuante para capturar clientes.</p>
-                <a href="/landing/index.html">Ver Projeto</a>
-            </div>
-
-            <div class="card">
-                <h3>Sistema de Orçamentos</h3>
-                <p>Calculadora JavaScript com tela de Login (Autenticação) para prestadores de serviços.</p>
-                <a href="/calculadora/index.html">Ver Projeto</a>
-            </div>
-
-            <div class="card">
-                <h3>CRM Gerenciador</h3>
-                <p>Aplicativo CRUD que salva dados de clientes e tarefas direto na memória do navegador (LocalStorage).</p>
-                <a href="/crm/index.html">Ver Projeto</a>
-            </div>
-
-            <div class="card">
-                <h3>Buscador de CEP (API)</h3>
-                <p>Integração com API externa para buscar endereços automaticamente usando o protocolo Fetch.</p>
-                <a href="/cep/index.html">Ver Projeto</a>.
-
-        </div>
-    </section>
+    <div class="formulario">
+        <h2>Endereço de Entrega 📦</h2>
+        
+        <label>Digite o CEP (só números)</label>
+        <input type="number" id="cep" placeholder="Ex: 01001000" onblur="buscarCEP()">
+        
+        <label>Rua</label>
+        <input type="text" id="rua" readonly placeholder="...">
+        
+        <label>Bairro</label>
+        <input type="text" id="bairro" readonly placeholder="...">
+        
+        <label>Cidade / Estado</label>
+        <input type="text" id="cidade" readonly placeholder="...">
+    </div>
 
     <script>
-        /* =========================================
-           SCRIPT 1: MÁQUINA DE ESCREVER (Typewriter)
-           ========================================= */
-        const palavras = ["Landing Pages.", "Sistemas Web.", "Automações.", "Links na Bio."];
-        let palavraAtual = 0;
-        let letraAtual = 0;
-        let apagando = false;
-        const elementoTexto = document.getElementById("texto-dinamico");
+        // Função que conversa com a API
+        function buscarCEP() {
+            let cepDigitado = document.getElementById("cep").value;
 
-        function digitar() {
-            const textoCompleto = palavras[palavraAtual];
-
-            // Se estiver apagando, remove uma letra. Se não, adiciona uma letra.
-            if (apagando) {
-                elementoTexto.textContent = textoCompleto.substring(0, letraAtual - 1);
-                letraAtual--;
-            } else {
-                elementoTexto.textContent = textoCompleto.substring(0, letraAtual + 1);
-                letraAtual++;
-            }
-
-            // Velocidade da digitação
-            let velocidade = apagando ? 50 : 100;
-
-            // Pausa quando termina de escrever a palavra inteira
-            if (!apagando && letraAtual === textoCompleto.length) {
-                velocidade = 2000; // Espera 2 segundos
-                apagando = true;
-            } 
-            // Troca para a próxima palavra quando termina de apagar
-            else if (apagando && letraAtual === 0) {
-                apagando = false;
-                palavraAtual++;
-                if (palavraAtual === palavras.length) { palavraAtual = 0; } // Volta pro início
-                velocidade = 500;
-            }
-
-            setTimeout(digitar, velocidade);
-        }
-
-        // Dá a partida na máquina de escrever assim que o site abre
-        document.addEventListener("DOMContentLoaded", digitar);
-
-        /* =========================================
-           SCRIPT 2: TEMA CLARO E ESCURO COM MEMÓRIA
-           ========================================= */
-        const botaoTema = document.getElementById("btn-tema");
-        
-        // Verifica se o usuário já tinha escolhido o tema claro na última visita
-        if (localStorage.getItem("tema") === "claro") {
-            document.body.classList.add("tema-claro");
-            botaoTema.textContent = "🌙 Tema Escuro";
-        }
-
-        function trocarTema() {
-            // O toggle liga e desliga a classe no <body>
-            document.body.classList.toggle("tema-claro");
-            
-            // Se o body agora tem a classe "tema-claro", salvamos isso na memória
-            if (document.body.classList.contains("tema-claro")) {
-                localStorage.setItem("tema", "claro");
-                botaoTema.textContent = "🌙 Tema Escuro";
-            } else {
-                // Se não tem, salvamos como escuro
-                localStorage.setItem("tema", "escuro");
-                botaoTema.textContent = "☀️ Tema Claro";
+            // Se o usuário digitou 8 números, fazemos o pedido (fetch)
+            if (cepDigitado.length === 8) {
+                
+                // O FETCH é o nosso "garçom". Mandamos ele ir nesse link gratuito (ViaCEP)
+                fetch(`https://viacep.com.br/ws/${cepDigitado}/json/`)
+                    
+                    // Quando a resposta chegar, transformamos ela em um Objeto JavaScript (JSON)
+                    .then(resposta => resposta.json())
+                    
+                    // Agora pegamos os dados e colocamos nas caixas de texto na tela
+                    .then(dados => {
+                        if (dados.erro) {
+                            alert("CEP não encontrado!");
+                        } else {
+                            // Preenchendo os inputs automaticamente!
+                            document.getElementById("rua").value = dados.logradouro;
+                            document.getElementById("bairro").value = dados.bairro;
+                            document.getElementById("cidade").value = dados.localidade + " / " + dados.uf;
+                        }
+                    })
+                    
+                    // Se a internet cair ou o site do governo estiver fora do ar:
+                    .catch(erro => alert("Erro ao buscar o CEP na internet."));
             }
         }
     </script>
 </body>
-  </html>
-  
+</html>

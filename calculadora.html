@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Orçamentos</title>
+    <style>
+        /* CSS Básico para deixar bonito no celular */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background-color: #1e1e24; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; padding: 20px; }
+        
+        .caixa { background-color: #2b2b36; padding: 30px; border-radius: 10px; width: 100%; max-width: 400px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        h2 { text-align: center; margin-bottom: 20px; color: #00ff88; }
+        
+        input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 5px; border: none; font-size: 16px; }
+        button { width: 100%; padding: 12px; background-color: #00ff88; color: #1e1e24; font-weight: bold; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        button:active { transform: scale(0.95); }
+        
+        .erro { color: #ff4d4d; text-align: center; margin-bottom: 15px; display: none; font-weight: bold; }
+        .resultado { margin-top: 20px; font-size: 22px; text-align: center; color: #00ff88; font-weight: bold; }
+
+        /* A calculadora começa escondida! */
+        #tela-calculadora { display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="tela-login" class="caixa">
+        <h2>Acesso Restrito</h2>
+        <p class="erro" id="mensagem-erro">Senha incorreta!</p>
+        
+        <input type="text" id="usuario" placeholder="Nome de usuário">
+        <input type="password" id="senha" placeholder="Senha">
+        
+        <button onclick="fazerLogin()">Entrar no Sistema</button>
+    </div>
+
+    <div id="tela-calculadora" class="caixa">
+        <h2>Calculadora de Serviço</h2>
+        
+        <label>Custo das Peças/Materiais (R$)</label>
+        <input type="number" id="custo-pecas" placeholder="Ex: 150.00">
+        
+        <label>Horas de Trabalho Estimadas</label>
+        <input type="number" id="horas-trabalho" placeholder="Ex: 3">
+        
+        <label>Valor da sua Hora (R$)</label>
+        <input type="number" id="valor-hora" placeholder="Ex: 50.00">
+        
+        <button onclick="calcularOrcamento()">Gerar Orçamento</button>
+        
+        <div id="resultado-final" class="resultado"></div>
+    </div>
+
+    <script>
+        // FUNÇÃO 1: O SISTEMA DE LOGIN
+        function fazerLogin() {
+            // Pegamos o que o usuário digitou
+            let userDigitado = document.getElementById("usuario").value;
+            let senhaDigitada = document.getElementById("senha").value;
+
+            // Lógica de Autenticação (Avaliando se é verdadeiro ou falso)
+            if (userDigitado === "admin" && senhaDigitada === "1234") {
+                // Se acertar: Esconde o login e mostra a calculadora
+                document.getElementById("tela-login").style.display = "none";
+                document.getElementById("tela-calculadora").style.display = "block";
+            } else {
+                // Se errar: Mostra a mensagem de erro
+                document.getElementById("mensagem-erro").style.display = "block";
+            }
+        }
+
+        // FUNÇÃO 2: A CALCULADORA DINÂMICA
+        function calcularOrcamento() {
+            // O "Number()" garante que o texto digitado seja lido como número matemático
+            let pecas = Number(document.getElementById("custo-pecas").value);
+            let horas = Number(document.getElementById("horas-trabalho").value);
+            let valorHora = Number(document.getElementById("valor-hora").value);
+
+            // A Matemática do negócio
+            let custoMaoDeObra = horas * valorHora;
+            let total = pecas + custoMaoDeObra;
+
+            // Mostrando o resultado formatado em Reais na tela
+            document.getElementById("resultado-final").innerHTML = "Total: R$ " + total.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>

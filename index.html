@@ -3,253 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-book: O Guia das Vendas Online</title>
+    <title>Meu Painel de Clientes</title>
     <style>
-        /* Reset de margens e configuração de fonte */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: #0f172a; color: #e2e8f0; padding: 20px; }
         
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
+        .container { max-width: 500px; margin: 0 auto; background-color: #1e293b; padding: 25px; border-radius: 12px; }
+        h1 { text-align: center; color: #38bdf8; margin-bottom: 20px; }
+        
+        .entrada-dados { display: flex; gap: 10px; margin-bottom: 20px; }
+        input { flex: 1; padding: 12px; border-radius: 6px; border: none; background-color: #334155; color: white; }
+        button.btn-salvar { padding: 12px 20px; border: none; border-radius: 6px; background-color: #38bdf8; color: #0f172a; font-weight: bold; cursor: pointer; }
+        
+        ul { list-style: none; }
+        li { background-color: #334155; padding: 15px; border-radius: 6px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        
+        /* A MÁGICA DO CSS AQUI */
+        .texto-tarefa { font-size: 16px; transition: 0.3s; cursor: pointer; }
+        
+        /* Essa classe será ativada pelo JavaScript */
+        .concluida { 
+            text-decoration: line-through; 
+            color: #22c55e; /* Verde profissional */
+            opacity: 0.7;
         }
 
-        /* --- HERO SECTION (A Primeira Impressão) --- */
-        .hero {
-            background: linear-gradient(to right, #141e30, #243b55);
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
-            border-bottom: 5px solid #ff8c00; /* Detalhe chamativo na borda */
-        }
-
-        .hero h1 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-
-        .hero h1 span {
-            color: #ff8c00; /* Destacando a promessa principal */
-        }
-
-        .hero p {
-            font-size: 16px;
-            margin-bottom: 30px;
-            color: #cccccc;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* O Botão de Compra (Call to Action) */
-        .cta-botao {
-            display: inline-block;
-            background-color: #ff8c00;
-            color: #141e30;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 15px 30px;
-            border-radius: 5px;
-            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
-            transition: transform 0.2s, background-color 0.2s;
-            animation: pulsar 2s infinite; /* Animação para chamar atenção */
-        }
-
-        .cta-botao:active {
-            transform: scale(0.95);
-        }
-
-        /* --- SEÇÃO DE BENEFÍCIOS --- */
-        .beneficios {
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .beneficios h2 {
-            font-size: 24px;
-            margin-bottom: 30px;
-            color: #243b55;
-        }
-
-        /* Usando Flexbox para organizar os cards no celular */
-        .cards-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .card {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            border-left: 4px solid #243b55;
-        }
-
-        .card h3 {
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        /* Animação do botão */
-        @keyframes pulsar {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-                /* --- SEÇÃO DE OFERTA (PREÇO) --- */
-        .oferta {
-            background-color: #e0f7fa; /* Fundo levemente azulado para destacar */
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .preco-box {
-            background-color: white;
-            padding: 40px 20px;
-            border-radius: 10px;
-            max-width: 400px;
-            margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-top: 5px solid #ff8c00; /* Laranja combinando com o seu design */
-        }
-
-        .preco-box h2 {
-            color: #243b55;
-            margin-bottom: 10px;
-        }
-
-        .preco-valor {
-            font-size: 40px;
-            color: #ff8c00;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-
-        .preco-valor span {
-            font-size: 20px;
-            color: #666;
-        }
-
-        /* --- RODAPÉ (FOOTER) --- */
-        footer {
-            background-color: #141e30;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-        }
-        /* --- BOTÃO FLUTUANTE DO WHATSAPP --- */
-        .whatsapp-float {
-            position: fixed; /* Fixa o elemento na tela */
-            width: 60px;
-            height: 60px;
-            bottom: 20px; /* Distância do fundo */
-            right: 20px; /* Distância da direita */
-            background-color: #25d366; /* Verde oficial do WhatsApp */
-            color: white;
-            border-radius: 50px;
-            text-align: center;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 1000; /* Garante que fique por cima de tudo no site */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            transition: transform 0.3s;
-            animation: pulse-ws 2s infinite; /* A onda de atenção */
-        }
-
-        /* Efeito de clique */
-        .whatsapp-float:active {
-            transform: scale(0.9);
-        }
-
-        /* A animação da onda verde */
-        @keyframes pulse-ws {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
+        .botoes-acao { display: flex; gap: 10px; }
+        .btn-check { background-color: #22c55e; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-apagar { background-color: #ef4444; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <header class="hero">
-        <h1>Aprenda a criar uma renda extra <span>usando apenas o celular</span></h1>
-        <p>O método passo a passo para iniciar no mercado digital e realizar suas primeiras vendas sem precisar aparecer na câmera.</p>
-        <a href="#comprar" class="cta-botao">Quero Começar Hoje!</a>
-    </header>
-
-    <section class="beneficios">
-        <h2>O que você vai descobrir neste E-book?</h2>
-        
-        <div class="cards-container">
-            <div class="card">
-                <h3>🚀 Estratégias Validadas</h3>
-                <p>Técnicas de vendas diretas que funcionam para qualquer nicho de mercado.</p>
-            </div>
-            
-            <div class="card">
-                <h3>📱 Liberdade Geográfica</h3>
-                <p>Trabalhe de qualquer lugar precisando apenas de uma conexão com a internet.</p>
-            </div>
-            
-            <div class="card">
-                <h3>💰 Baixo Custo Inicial</h3>
-                <p>Como estruturar o seu negócio sem precisar investir fortunas em anúncios.</p>
-            </div>
+    <div class="container">
+        <h1>Gerenciador de Pedidos ✅</h1>
+        <div class="entrada-dados">
+            <input type="text" id="novo-pedido" placeholder="Ex: Fazer site do João...">
+            <button class="btn-salvar" onclick="adicionar()">Salvar</button>
         </div>
-    </section>
-        <section id="comprar" class="oferta">
-        <div class="preco-box">
-            <h2>Adquira seu E-book Agora</h2>
-            <p>Acesso imediato ao método completo.</p>
-            <div class="preco-valor"><span>R$</span> 47,90</div>
-            
-            <a href="https://wa.me/5585992398900" class="cta-botao">Comprar Agora</a>
-        </div>
-    </section>
+        <ul id="lista-pedidos"></ul>
+    </div>
 
-    <footer>
-        <p>© 2026 Sua Marca Digital. Todos os direitos reservados.</p>
-    </footer>
     <script>
-        // 1. Procuramos todos os links que começam com "#" (como o nosso href="#comprar")
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
-            
-            // 2. Adicionamos um "ouvinte" para quando alguém clicar no botão
-            link.addEventListener('click', function (evento) {
-                
-                // 3. Impedimos o comportamento padrão do HTML (que é aquele pulo seco)
-                evento.preventDefault(); 
-                
-                // 4. Descobrimos para onde o botão quer ir
-                const destino = document.querySelector(this.getAttribute('href'));
-                
-                // 5. Comandamos a tela para deslizar suavemente até o destino!
-                destino.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        // Agora nossa lista guarda "Objetos"
+        let pedidos = JSON.parse(localStorage.getItem("meusPedidosAvancado")) || [];
+
+        function atualizarTela() {
+            let listaHTML = document.getElementById("lista-pedidos");
+            listaHTML.innerHTML = ""; 
+
+            for (let i = 0; i < pedidos.length; i++) {
+                // Se a tarefa estiver concluída, adicionamos a classe CSS "concluida"
+                let classeCSS = pedidos[i].concluido ? "concluida" : "";
+
+                listaHTML.innerHTML += `
+                    <li>
+                        <span class="${classeCSS}">${pedidos[i].nome}</span>
+                        <div class="botoes-acao">
+                            <button class="btn-check" onclick="marcarFeito(${i})">✔</button>
+                            <button class="btn-apagar" onclick="deletar(${i})">X</button>
+                        </div>
+                    </li>
+                `;
+            }
+        }
+
+        function adicionar() {
+            let input = document.getElementById("novo-pedido");
+            if (input.value !== "") {
+                // Salva como Objeto (nome do pedido + status de conclusão)
+                pedidos.push({ nome: input.value, concluido: false }); 
+                input.value = ""; 
+                salvarNoCelular(); 
+                atualizarTela(); 
+            }
+        }
+
+        // FUNÇÃO NOVA: Inverte o status de false para true (e vice-versa)
+        function marcarFeito(posicao) {
+            pedidos[posicao].concluido = !pedidos[posicao].concluido; 
+            salvarNoCelular();
+            atualizarTela();
+        }
+
+        function deletar(posicao) {
+            pedidos.splice(posicao, 1); 
+            salvarNoCelular();
+            atualizarTela();
+        }
+
+        function salvarNoCelular() {
+            localStorage.setItem("meusPedidosAvancado", JSON.stringify(pedidos));
+        }
+
+        atualizarTela();
     </script>
-        <a href="https://wa.me/5585992398900?text=Olá!%20Tenho%20interesse%20nas%20estratégias%20de%20vendas." class="whatsapp-float" target="_blank">
-        
-        <svg viewBox="0 0 32 32" width="35" height="35" fill="white">
-            <path d="M16.01 2.01A13.92 13.92 0 0 0 2.09 15.93c0 2.45.63 4.83 1.83 6.94L2 29.98l7.28-1.9a13.84 13.84 0 0 0 6.73 1.74A13.92 13.92 0 0 0 29.93 15.9 13.92 13.92 0 0 0 16.01 2.01zm0 25.5a11.5 11.5 0 0 1-5.88-1.61l-.42-.25-4.36 1.14 1.16-4.25-.28-.44a11.5 11.5 0 0 1-1.72-6.07A11.55 11.55 0 0 1 16.01 4.38a11.55 11.55 0 0 1 11.53 11.54 11.55 11.55 0 0 1-11.53 11.58zm6.33-8.63c-.35-.17-2.06-1.01-2.38-1.13-.32-.12-.55-.18-.78.17-.23.35-.9 1.13-1.11 1.36-.2.23-.41.26-.76.09-.34-.17-1.47-.54-2.8-1.73-1.03-.92-1.73-2.06-1.93-2.41-.2-.35-.02-.54.15-.71.16-.16.35-.41.52-.61.18-.2.24-.35.36-.58.11-.23.05-.44-.04-.62-.09-.17-.78-1.88-1.07-2.58-.28-.68-.57-.59-.78-.6-.2-.01-.43-.01-.66-.01-.23 0-.61.09-.93.44s-1.22 1.19-1.22 2.9c0 1.71 1.25 3.37 1.43 3.6.17.24 2.45 3.75 5.94 5.26 2.37 1.03 3.23 1.11 4.41.94 1.33-.19 4.05-1.66 4.62-3.26.57-1.6.57-2.98.4-3.27-.18-.28-.65-.45-1-.62z"/>
-        </svg>
-    </a>
-
-</body>
-
-
 </body>
 </html>
